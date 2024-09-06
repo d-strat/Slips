@@ -75,6 +75,7 @@ class RedisDB(IoCHandler, AlertHandler, ProfileHandler, IObservable):
         "control_channel",
         "new_module_flow" "cpu_profile",
         "memory_profile",
+        "fides",
     }
     # The name is used to print in the outputprocess
     name = "DB"
