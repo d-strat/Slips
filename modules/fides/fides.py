@@ -55,8 +55,10 @@ class Fides(IModule):
             self.logger.log_line(f"Received message with data: {msg['data']}")
 
             if data['type'] == 'alert':
+                self.logger.log_line(f"Alert arrived")
                 # self.__alerts.dispatch_alert(target=data['target'], confidence=data['confidence'], score=data['score'])
             elif data['type'] == 'intelligence_request':
                 # self.__intelligence.request_data(target=data['target'])
+                self.logger.log_line(f"Intelligence requast arrived")
             else:
                 self.logger.log_error(f"Unhandled message! {message['data']}", message)
