@@ -12,7 +12,7 @@
 
 # Must imports
 from slips_files.common.imports import *
-
+import subprocess
 
 class Template(IModule):
     # Name: short name of the module. Do not use spaces
@@ -34,12 +34,19 @@ class Template(IModule):
             "new_ip": self.c1,
         }
 
+        # build docker
+        subprocess.run(["docker", "build", "--tag", "'iris'", "../../iris/"])
+        # start container
+        subprocess.run(["docker", "run", "--detach", "iris"])
+        print("Fimos is OK init()")
+
+
     def pre_main(self):
         """
         Initializations that run only once before the main() function runs in a loop
         utils.drop_root_privs()
         """
-        
+        print("Fimos is OK pre_main()")
 
 
     def main(self):
