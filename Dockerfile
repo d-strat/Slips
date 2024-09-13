@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Convert line endings for files in /StratosphereLinuxIPS
 RUN cd /StratosphereLinuxIPS && find . -type f -exec dos2unix {} \;
+RUN ./slips.py || true
 
 # Set entrypoint to bash
 CMD ["/bin/bash"]

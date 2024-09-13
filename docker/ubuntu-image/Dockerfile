@@ -72,26 +72,4 @@ RUN  pip install --ignore-installed --no-cache-dir -r install/requirements.txt \
     && cd modules/kalipso \
     && npm install
 
-# make docker available BEG
-RUN apt-get update && apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
-
-# Add Docker’s official GPG key
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
-# Set up the stable Docker repository
-RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-# Install Docker
-RUN apt-get update && apt-get install -y docker-ce-cli
-
-# Ensure Docker is executable by default
-RUN chmod +x /usr/bin/docker
-
-# make docker available END
-
 CMD /bin/bash

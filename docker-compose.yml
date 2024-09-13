@@ -1,4 +1,14 @@
-version: '3.7'
+x-peer: &default-peer
+  build:
+    context: ./iris
+    dockerfile: ./Dockerfile
+  environment:
+    - GOLOG_LOG_LEVEL=iris=debug
+  command:
+    - ./peercli
+    - --conf
+    - ./vol/config.yaml
+
 services:
   slips:
     build:
@@ -12,9 +22,17 @@ services:
       - ./logs/:/var/log/
     network_mode: "host"
     entrypoint: ["/bin/bash"]
+
   iris:
-    build:
-      context: C:/Users/timel/MyFolder/MOI_3/Stratosphere/Slips/iris
-      dockerfile: Dockerfile
-    container_name: IrisApp
+    <<: *default-peer
+    volumes:
+      - ./iris/dev/peer:/usr/iris/vol
+    depends_on:
+      - slips
     network_mode: "host"
+#  iris:
+#    build:
+#      context: ./iris
+#      dockerfile: Dockerfile
+#    container_name: IrisApp
+#    network_mode: "host"
