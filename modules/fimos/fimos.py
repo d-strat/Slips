@@ -35,9 +35,9 @@ class Template(IModule):
         }
 
         # build docker
-        subprocess.run(["docker", "build", "--tag", "'iris'", "../../iris/"])
+        #subprocess.run(["docker", "build", "--tag", "'iris'", "../../iris/"])
         # start container
-        subprocess.run(["docker", "run", "--detach", "iris"])
+        #subprocess.run(["docker", "run", "--detach", "iris"])
         print("Fimos is OK init()")
 
 

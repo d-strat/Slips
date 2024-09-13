@@ -14,14 +14,13 @@ services:
     build:
       context: "."
       dockerfile: Dockerfile
-    container_name: SlipsMy
+    container_name: myslips
     cap_add:
       - NET_ADMIN
     volumes:
       - ./slips/config:/StratosphereLinuxIPS/config/
       - ./logs/:/var/log/
     network_mode: "host"
-    entrypoint: ["/bin/bash"]
 
   iris:
     <<: *default-peer
@@ -30,9 +29,3 @@ services:
     depends_on:
       - slips
     network_mode: "host"
-#  iris:
-#    build:
-#      context: ./iris
-#      dockerfile: Dockerfile
-#    container_name: IrisApp
-#    network_mode: "host"
