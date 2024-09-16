@@ -18,14 +18,31 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./slips/config:/StratosphereLinuxIPS/config/
-      - ./logs/:/var/log/
-    network_mode: "host"
-
+      #- ./slips/config:/StratosphereLinuxIPS/config/
+      #- ./logs/:/var/log/
+      - C:\Users\timel\MyFolder\MOI_3\Stratosphere\Slips/config:/StratosphereLinuxIPS/config/
+      - C:\Users\timel\MyFolder\MOI_3\Stratosphere\Slips/dataset:/StratosphereLinuxIPS/dataset/
+    ports:
+      - "6379:6379"
+    networks:
+      si_net:
+        ipv4_address: 172.168.0.2
+    expose:
+      - "6379"
+  
   iris:
     <<: *default-peer
     volumes:
       - ./iris/dev/peer:/usr/iris/vol
     depends_on:
       - slips
-    network_mode: "host"
+    networks:
+      si_net:
+        ipv4_address: 172.168.0.10
+
+networks:
+  si_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.168.0.0/24
