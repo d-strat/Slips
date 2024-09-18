@@ -12,6 +12,8 @@ RUN cd /StratosphereLinuxIPS && find . -type f -exec dos2unix {} \;
 
 
 COPY ./fides /StratosphereLinuxIPS/fides
+COPY ./modules/fimos /StratosphereLinuxIPS/modueles/fimos
+
 WORKDIR /StratosphereLinuxIPS/fides
 # Step 4: Install the dependencies using pip
 RUN pip install --no-cache-dir -r requirements.txt
