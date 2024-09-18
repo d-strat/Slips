@@ -13,6 +13,9 @@
 # Must imports
 from slips_files.common.imports import *
 import subprocess
+import time
+import os
+import signal
 
 class Template(IModule):
     # Name: short name of the module. Do not use spaces
@@ -46,6 +49,7 @@ class Template(IModule):
         Initializations that run only once before the main() function runs in a loop
         utils.drop_root_privs()
         """
+        self.fides_process = subprocess.Popen(['python', '/StratosphereLinuxIPS/fides/slips/module.py'])
         print("Fimos is OK pre_main()")
 
 
@@ -56,3 +60,9 @@ class Template(IModule):
             # Database every second
             data = len(self.db.getProfiles())
             self.print(f"Amount of profiles: {data}", 3, 0)
+    
+    def shutdown_gracefully(self):
+        os.kill(self.fides_process.pid, signal.SIGKILL)#SIGTERM)
+        self.fides_process.wait()
+        # Optionally, call the parent's (IModule) shutdown_gracefully method if needed
+        super().shutdown_gracefully()
