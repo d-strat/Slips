@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Convert line endings for files in /StratosphereLinuxIPS
 RUN cd /StratosphereLinuxIPS && find . -type f -exec dos2unix {} \;
 
+COPY ./modules/fimos /StratosphereLinuxIPS/modules/fimos
 
 COPY ./fides /StratosphereLinuxIPS/fides
-COPY ./modules/fimos /StratosphereLinuxIPS/modueles/fimos
+
 
 WORKDIR /StratosphereLinuxIPS/fides
 # Step 4: Install the dependencies using pip

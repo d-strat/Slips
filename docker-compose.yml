@@ -22,6 +22,7 @@ services:
       #- ./logs/:/var/log/
       - C:/Users/timel/MyFolder/MOI_3/Stratosphere/Slips/config:/StratosphereLinuxIPS/config/
       - C:/Users/timel/MyFolder/MOI_3/Stratosphere/Slips/dataset:/StratosphereLinuxIPS/dataset/
+      - C:\Users\timel\MyFolder\MOI_3\Stratosphere\Slips\modules\fimos:/StratosphereLinuxIPS/modules/fimos
     ports:
       - "6379:6379"
     networks:

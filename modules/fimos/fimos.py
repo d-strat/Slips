@@ -13,7 +13,6 @@
 # Must imports
 from slips_files.common.imports import *
 import subprocess
-import time
 import os
 import signal
 
@@ -49,7 +48,11 @@ class Template(IModule):
         Initializations that run only once before the main() function runs in a loop
         utils.drop_root_privs()
         """
-        self.fides_process = subprocess.Popen(['python', '/StratosphereLinuxIPS/fides/slips/module.py'])
+        print("Fimos is pre_main()")
+        try:
+            self.fides_process = subprocess.Popen(['python3', '/StratosphereLinuxIPS/fides/slips/module.py'])
+        except Exception as e:
+            print(f"An error occurred: {e}")
         print("Fimos is OK pre_main()")
 
 
